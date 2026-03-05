@@ -18,6 +18,17 @@ app.post('/signup', async (req, res)=>{
     
 })
 
+app.get('/user', async (req, res)=> {
+    const emailId = req.body.emailId
+    try{        
+        const user = await User.find({emailId: emailId})
+        res.send(user);
+    } catch(err){
+        res.status(400).send('ERROR: ', err.message)
+    }
+    
+})
+
 connectDB()
     .then(()=>{
         console.log('Database connected successfully')
